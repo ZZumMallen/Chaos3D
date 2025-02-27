@@ -1,20 +1,22 @@
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+namespace Chaos
 {
-    [SerializeField] Ammo ammo;
-    [SerializeField] GameObject projectilePrefab;
-    [SerializeField] Transform muzzle;
-
-    void Start()
+    public class Weapon : MonoBehaviour
     {
-        InvokeRepeating("fire", 1f, 1f);
-    }
+        [SerializeField] Ammo ammo;
+        [SerializeField] GameObject projectilePrefab;
+        [SerializeField] Transform muzzle;
 
-    void fire()
-    {
-        var projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
-        projectile.GetComponent<Projectile>().Ammo = ammo;
-    }
+        void Start()
+        {
+            InvokeRepeating("fire", 1f, 1f);
+        }
 
+        void fire()
+        {
+            var projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
+            projectile.GetComponent<Projectile>().Ammo = ammo;
+        }
+    }
 }
