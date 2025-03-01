@@ -1,30 +1,49 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Chaos
 {
     public class Target : MonoBehaviour
     {
-        private Renderer rd;
-        [SerializeField] float health = 1000f;
 
-        private void Start()
+        Rigidbody rb;
+
+        [SerializeField] bool moveLeftInstead;    
+        [SerializeField] float m_enemySpeed;
+        [SerializeField] float m_enemyHealth = 100f;
+
+        private void Awake()
         {
-            rd = GetComponent<Renderer>();
+            rb = GetComponent<Rigidbody>();
+            if (m_enemyHealth == 0f) Debug.LogError($"No {this.name} health you dummy!");
+            if (m_enemySpeed == 0f) Debug.LogError($"No {this.name} speed you dummy!");
         }
 
-        void ApplyDamage(float damage)
+        private void Update()
         {
-            Debug.Log($"Applying {damage} damage");
-
-            health -= damage;
-
-            if (health <= 0)
+            if (m_enemyHealth <= 0f)
             {
-                Debug.Log("No health left, please destroy");
                 Destroy(gameObject);
             }
-
-            rd.material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         }
+
+        private void FixedUpdate()
+        {
+            if (moveLeftInstead)
+            {
+                rb.linearVelocity = new Vector3(-1f * m_enemySpeed, rb.linearVelocity.y, 0f);
+            }
+            else
+            {
+                rb.linearVelocity = new Vector3(1f * m_enemySpeed, rb.linearVelocity.y, 0f);
+            }
+        }
+
+        public void TakeDamage(float damage)
+        {
+            m_enemyHealth -= damage;
+        }     
     }
 }
+

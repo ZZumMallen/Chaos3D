@@ -1,29 +1,31 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-using UnityEngine.Rendering;
-
 
 namespace Chaos
-{
+{    
     public class Projectile : MonoBehaviour
     {
-        public Ammo Ammo { get; set; }
-
-        void Update()
+        private float damageValue = 20f;
+        private void Awake()
         {
-            if (Physics.Raycast(new Ray(transform.position, transform.right), out RaycastHit hit, 40))
+            Destroy(gameObject, 3);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Hostile"))
             {
-                
-                transform.position = hit.point;
-                hit.collider.SendMessage("ApplyDamage", Ammo.KineticEnergyDamage, SendMessageOptions.DontRequireReceiver);
-                GetComponent<MeshRenderer>().enabled = false;
-                Destroy(gameObject, 1f);
-                Destroy(this);
+                other.gameObject.SendMessage("TakeDamage", damageValue);
+                Destroy(gameObject);
+                Debug.Log("Target Hit:" + other.gameObject.name);
+
             }
             else
             {
-                transform.Translate(Vector3.right * Ammo.velocity * Time.deltaTime);
-                Destroy(this, 1f);
+                Destroy(gameObject);
+                Debug.Log(other.gameObject.name);
             }
         }
     }
 }
+

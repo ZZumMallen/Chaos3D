@@ -1,22 +1,38 @@
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 namespace Chaos
 {
     public class Weapon : MonoBehaviour
     {
-        [SerializeField] Ammo ammo;
-        [SerializeField] GameObject projectilePrefab;
-        [SerializeField] Transform muzzle;
 
-        void Start()
+        [SerializeField] private Transform firingPoint;
+        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private float bulletSpeed;
+
+        //reference doc in the python folder
+        private void Update()
         {
-            InvokeRepeating("fire", 1f, 1f);
+            HandleInput();
+            //Debug.DrawRay(firingPoint.position, firingPoint.forward * 10, Color.blue);
         }
 
-        void fire()
+        void HandleInput()
         {
-            var projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
-            projectile.GetComponent<Projectile>().Ammo = ammo;
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Shoot();
+            }
+        }
+
+        void Shoot()
+        {
+            var bullet = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
+            bullet.GetComponent<Rigidbody>().linearVelocity = firingPoint.forward * bulletSpeed;
+
         }
     }
 }
