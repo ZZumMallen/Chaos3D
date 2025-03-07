@@ -37,6 +37,7 @@ namespace Chaos
             {
                 _jumpKeyPressed = true;
                 _jumpKeyReleasedEarly = false;
+                if (!_isGrounded) _coyoteTimeCounter = 0f;
             }
             if (Input.GetKeyUp(KeyCode.Space))
             {
@@ -47,13 +48,12 @@ namespace Chaos
         public void HandleJump()
         {
             if (_jumpKeyPressed && _coyoteTimeCounter > 0f)
-            {
+            {                
                 _rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
                 _coyoteTimeCounter = 0f;
             }
 
-            _jumpKeyPressed = false;
-            
+            _jumpKeyPressed = false;            
             ApplyBetterJumpPhysics();
         }
 
@@ -63,10 +63,12 @@ namespace Chaos
 
             if (_isGrounded)
             {
+                Debug.Log(_isGrounded);
                 _coyoteTimeCounter = coyoteTime;
             }
             else
             {
+                Debug.Log(_isGrounded);
                 _coyoteTimeCounter -= Time.fixedDeltaTime;
             }
         }
@@ -99,13 +101,7 @@ namespace Chaos
 
         private bool CheckIfGrounded()
         {
-            Vector3 positionRight = groundCheckPoint.position + new Vector3(0.25f, 0f, 0f);
-            Vector3 positionLeft = groundCheckPoint.position + new Vector3(-0.25f, 0f, 0f);
-
-            return
-                Physics.Raycast(groundCheckPoint.position, Vector3.down, groundCheckBuffer, groundLayer) ||
-                Physics.Raycast(positionRight, Vector3.down, groundCheckBuffer, groundLayer) ||
-                Physics.Raycast(positionLeft, Vector3.down, groundCheckBuffer, groundLayer);
+            return Physics.SphereCast(groundCheckPoint.position + Vector3.up * 0.1f, 0.2f, Vector3.down,out _, groundCheckBuffer + 0.1f,groundLayer);
         }
     }
 }
