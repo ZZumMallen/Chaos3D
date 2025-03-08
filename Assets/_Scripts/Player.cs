@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Chaos
+namespace Chaos.Player
 {
     [RequireComponent(typeof(PlayerMovement))]
     [RequireComponent(typeof(PlayerJump))]

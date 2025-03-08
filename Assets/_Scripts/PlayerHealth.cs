@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Chaos
+namespace Chaos.Player
 {
     public class PlayerHealth : MonoBehaviour
     {
