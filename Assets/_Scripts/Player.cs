@@ -20,21 +20,20 @@ namespace Chaos.Player
 
         private void Update()
         {
-            // Process all input in Update
+            
             _movement.ProcessInput();
             _jump.ProcessInput();
         }
 
         private void FixedUpdate()
         {
-            // Apply physics in FixedUpdate
+            
             _jump.HandleGroundCheck();
             _jump.HandleJump();
             _movement.Move();
             _movement.FlipPlayer();
         }
 
-        // This public method allows other systems to damage the player
         public void ApplyDamage(float damage)
         {
             _health.ApplyDamage(damage);

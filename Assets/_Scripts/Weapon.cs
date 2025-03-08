@@ -14,12 +14,7 @@ namespace Chaos
         [SerializeField] private GameObject bulletPrefab;
    
         private void Update()
-        {
-            ProcessInput();            
-        }
-
-        void ProcessInput()
-        {    
+        {      
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 FireProjectile();

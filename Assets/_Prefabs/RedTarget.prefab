@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 6080431701717572729}
   - component: {fileID: 7916874791324303753}
   - component: {fileID: 2325040756571415002}
-  - component: {fileID: 4747764374303694391}
+  - component: {fileID: 7034016054040464861}
+  - component: {fileID: -518433376108150977}
+  - component: {fileID: -2526080159495163858}
   m_Layer: 9
   m_Name: RedTarget
   m_TagString: HostileTarget
@@ -139,7 +141,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &4747764374303694391
+--- !u!114 &7034016054040464861
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,7 +153,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3cc7c2b6e5b434a8bde51fe55ffc5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveLeftInstead: 1
-  m_enemySpeed: 2
-  m_enemyHealth: 100
-  flashDuration: 0.1
+  stats: {fileID: 11400000, guid: f68d278ce34a94844b3d49839858e4af, type: 2}
+--- !u!114 &-518433376108150977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4547919352449757468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eaa5272761fb1d449cdb6943814194b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2526080159495163858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4547919352449757468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c270f8dc5a6c6a044afde88e8cb9232d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

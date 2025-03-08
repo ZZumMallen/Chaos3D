@@ -3,66 +3,42 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Chaos
+namespace Chaos.Target
 {
+    [RequireComponent(typeof(TargetHealth))]
+    [RequireComponent(typeof(TargetMovement))]
+
     public class Target : MonoBehaviour
     {
-
-        Rigidbody rb;
-
-        [Tooltip("Default: Move Right")]
-        [SerializeField] bool moveLeftInstead;    
-        [SerializeField] float m_enemySpeed;
-        [SerializeField] float m_enemyHealth = 100f;
-
-        private Color originalColor;
-        private Renderer enemyRenderer;
-
-        public float flashDuration = 0.1f;
+        [SerializeField] Stats stats;
+        private TargetHealth _health;
+        private TargetMovement _movement;
 
         private void Awake()
         {
-            rb = GetComponent<Rigidbody>();
-            if (m_enemyHealth == 0f) Debug.LogError($"No {this.name} health you dummy!");
-            if (m_enemySpeed == 0f) Debug.LogError($"No {this.name} speed you dummy!");
+            _health = GetComponent<TargetHealth>();
+            _movement = GetComponent<TargetMovement>();
+            
         }
 
         private void Start()
         {
-            enemyRenderer = GetComponent<Renderer>();
-            originalColor = enemyRenderer.material.color;
+            _health.Stats = stats;
         }
 
         private void FixedUpdate()
         {
-            if (moveLeftInstead)
-            {
-                rb.linearVelocity = new Vector3(-1f * m_enemySpeed, rb.linearVelocity.y, 0f);
-            }
-            else
-            {
-                rb.linearVelocity = new Vector3(1f * m_enemySpeed, rb.linearVelocity.y, 0f);
-            }
+            // Apply physics in FixedUpdate
+            _movement.HandleData(stats.moveSpeed);
+            _movement.Move();          
         }
 
         public void ApplyDamage(float damage)
         {
-            m_enemyHealth -= damage;
-
-            if (m_enemyHealth <= 0f)
-            {
-                Destroy(gameObject);
-            }
-
-            StartCoroutine(FlashEffect());
+            _health.ApplyDamage(damage);
+            //_health.Stats = stats;
         }
 
-        private IEnumerator FlashEffect()
-        {      
-            enemyRenderer.material.color = Color.white;
-            yield return new WaitForSeconds(flashDuration);
-            enemyRenderer.material.color = originalColor;
-        }     
     }
 }
 

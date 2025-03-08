@@ -6,8 +6,8 @@ namespace Chaos.Player
     public class PlayerHealth : MonoBehaviour
     {
         [SerializeField] private float maxHealth = 1000f;
-        [SerializeField] private float flashDuration = 0.1f;
-        
+
+        private readonly float _flashDuration = 0.1f;        
         private float _currentHealth;
         private Color _originalColor;
         private Renderer _playerRenderer;
@@ -42,7 +42,7 @@ namespace Chaos.Player
         private IEnumerator FlashEffect()
         {
             _playerRenderer.material.color = Color.white;
-            yield return new WaitForSeconds(flashDuration);
+            yield return new WaitForSeconds(_flashDuration);
             _playerRenderer.material.color = _originalColor;
         }
 

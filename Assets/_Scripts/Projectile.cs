@@ -12,7 +12,7 @@ namespace Chaos
         {
             Ray ray = new(transform.position, transform.forward);
 
-            Debug.Log(gameObject.layer);
+            //Debug.Log(gameObject.layer);
             
             if (Physics.Raycast(ray, out RaycastHit hit, Ammo.velocity * Time.deltaTime))
             {
