@@ -6,31 +6,18 @@ namespace Chaos
     public class Projectile : MonoBehaviour
     {
         public Ammo Ammo { get; set; }
-        private string layerString;
 
 
-        // other.gameObject.layer == LayerMask.NameToLayer("Player")
-
-        private void Start()
+        private void Update()
         {
-            if (Ammo.isEnemyBullet)
-            {
-                layerString = "Hostile";
-            }
-            else
-            {
-                layerString = "Player";
-            }
-        }
+            Ray ray = new(transform.position, transform.forward);
 
-        private void FixedUpdate()
-        {
-            Ray ray = new Ray(transform.position, transform.forward);
-
+            Debug.Log(gameObject.layer);
+            
             if (Physics.Raycast(ray, out RaycastHit hit, Ammo.velocity * Time.deltaTime))
             {
-                
-                if(hit.collider.gameObject.layer != LayerMask.NameToLayer(layerString))
+
+                if (hit.collider.gameObject.layer != gameObject.layer)
                 {
                     transform.position = hit.point;
                     hit.collider.SendMessage("ApplyDamage", Ammo.damage, SendMessageOptions.DontRequireReceiver);
@@ -42,6 +29,8 @@ namespace Chaos
             else
             {
                 transform.Translate(Vector3.forward * Ammo.velocity * Time.deltaTime);
+                Destroy(gameObject,3);
+                Destroy(this, 3);
             }
         }
     }

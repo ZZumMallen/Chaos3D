@@ -12,14 +12,7 @@ namespace Chaos
 
         private void Start()
         {
-            if (Ammo.isEnemyBullet)
-            {
-                layerString = "Hostile";
-            }
-            else
-            {
-                layerString = "Player";
-            }
+
         }
 
         private void FixedUpdate()

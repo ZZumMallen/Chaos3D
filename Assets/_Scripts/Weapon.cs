@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -10,27 +11,25 @@ namespace Chaos
     {
         [SerializeField] Ammo ammo;
         [SerializeField] private Transform firingPoint;
-        [SerializeField] private GameObject bulletPrefab;       
-
+        [SerializeField] private GameObject bulletPrefab;
+   
         private void Update()
         {
-            HandleInput();
-            //Debug.DrawRay(firingPoint.position, firingPoint.forward * 10, Color.blue);
+            ProcessInput();            
         }
 
-        void HandleInput()
-        {
+        void ProcessInput()
+        {    
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Shoot();
-            }
+                FireProjectile();
+            }          
         }
 
-        void Shoot()
+        void FireProjectile()
         {
             var projectile = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
-            projectile.GetComponent<Projectile>().Ammo = ammo;
-            
+            projectile.GetComponent<Projectile>().Ammo = ammo;         
         }
     }
 }

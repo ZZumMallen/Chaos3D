@@ -63,12 +63,10 @@ namespace Chaos
 
             if (_isGrounded)
             {
-                Debug.Log(_isGrounded);
                 _coyoteTimeCounter = coyoteTime;
             }
             else
             {
-                Debug.Log(_isGrounded);
                 _coyoteTimeCounter -= Time.fixedDeltaTime;
             }
         }

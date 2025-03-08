@@ -1,5 +1,13 @@
 using UnityEngine;
 
+public enum WeaponTriggerType
+{
+    MouseClick,
+    KeyPress,
+    RaycastHit,
+    Auto
+}
+
 [CreateAssetMenu(fileName = "Ammo", menuName = "Scriptable Objects/Ammo")]
 public class Ammo : ScriptableObject
 {
@@ -11,6 +19,4 @@ public class Ammo : ScriptableObject
     [Tooltip("Bullet Damage")]
     public float damage = 20f;
 
-    [Tooltip("Default: Player Bullet")]
-    public bool isEnemyBullet = false;
 }
