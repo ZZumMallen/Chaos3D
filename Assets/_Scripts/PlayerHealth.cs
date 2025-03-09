@@ -12,11 +12,14 @@ namespace Chaos.Player
         private Color _originalColor;
         private Renderer _playerRenderer;
 
+        SoundManager soundManager;
+
         private void Awake()
         {
             _playerRenderer = GetComponent<Renderer>();
             _originalColor = _playerRenderer.material.color;
             _currentHealth = maxHealth;
+            soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
         }
 
         public void ApplyDamage(float damage)
@@ -36,6 +39,7 @@ namespace Chaos.Player
         private void Die()
         {
             // Can be extended with death animation or game over logic
+            soundManager.PlaySFX(soundManager.playerDeath);
             Destroy(gameObject);
         }
 

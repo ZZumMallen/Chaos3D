@@ -12,7 +12,14 @@ namespace Chaos
         [SerializeField] Ammo ammo;
         [SerializeField] private Transform firingPoint;
         [SerializeField] private GameObject bulletPrefab;
-   
+
+        SoundManager soundManager;
+
+        private void Awake()
+        {
+            soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
+        }
+
         private void Update()
         {      
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -24,6 +31,7 @@ namespace Chaos
         void FireProjectile()
         {
             var projectile = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
+            soundManager.PlaySFX(soundManager.playerShoot);
             projectile.GetComponent<Projectile>().Ammo = ammo;         
         }
     }
