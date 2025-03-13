@@ -1,38 +1,36 @@
-using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 namespace Chaos
 {
-    public class Weapon : MonoBehaviour
+    public class BubbleGun : MonoBehaviour
     {
-        [SerializeField] Ammo ammo;
-        [SerializeField] private Transform firingPoint;
+        [SerializeField] private Ammo ammo;
         [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private Transform firingPoint;
 
+        //GameObject bubbleGunPrefab;
         SoundManager soundManager;
 
         private void Awake()
         {
             soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
+            //bubbleGunPrefab = GameObject.FindGameObjectWithTag("Bubble");
         }
 
         private void Update()
-        {      
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 FireProjectile();
-            }          
+            }
         }
 
         void FireProjectile()
         {
             var projectile = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
             soundManager.PlaySFX(soundManager.playerShoot);
-            projectile.GetComponent<Projectile>().Ammo = ammo;         
+            projectile.GetComponent<BubbleGunProjectile>().Ammo = ammo;            
         }
     }
 }
+

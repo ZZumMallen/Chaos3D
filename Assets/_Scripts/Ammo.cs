@@ -1,13 +1,5 @@
 using UnityEngine;
 
-public enum WeaponTriggerType
-{
-    MouseClick,
-    KeyPress,
-    RaycastHit,
-    Auto
-}
-
 [CreateAssetMenu(fileName = "Ammo", menuName = "Scriptable Objects/Ammo")]
 public class Ammo : ScriptableObject
 {

@@ -8,7 +8,7 @@ namespace Chaos
 {
     public class WeaponEnemySighted : MonoBehaviour
     {
-        [SerializeField] Ammo ammo;
+        [SerializeField] Ammo Ammo;
         [SerializeField] private Transform firingPoint;
         [SerializeField] private GameObject bulletPrefab;
 
@@ -18,8 +18,7 @@ namespace Chaos
         private float shootCooldownCounter;
 
         private void Start()
-        {
-            
+        {            
             shootCooldownCounter = 0f;
 
             if (firingPoint == null)
@@ -61,7 +60,7 @@ namespace Chaos
             }
 
             var projectile = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
-            projectile.GetComponent<EnemyProjectile>().Ammo = ammo;
+            projectile.GetComponent<EnemyProjectile>().Ammo = Ammo;
 
         }
 

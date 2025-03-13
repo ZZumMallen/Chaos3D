@@ -6,7 +6,17 @@ namespace Chaos.Target
 {
     public class TargetHealth : MonoBehaviour
     {
+        [SerializeField] private GameObject _bubble;
         private Stats _stats;
+
+        private readonly float _flashDuration = 0.1f;
+        private Color _originalColor;
+        private Renderer _targetRenderer;
+
+
+        private float _currentHealth;
+        private bool _initialized = false;
+
         public Stats Stats
         {
             get { return _stats; }
@@ -20,27 +30,34 @@ namespace Chaos.Target
             }
         }
 
-        private readonly float _flashDuration = 0.1f;
-        private Color _originalColor;
-        private Renderer _targetRenderer;
-        private float _currentHealth;
-        private bool _initialized = false;
-
         void Awake()
         {
+            _targetRenderer = GetComponent<Renderer>();
+            if (_targetRenderer != null)
+            {
+                _originalColor = _targetRenderer.material.color;
+            }
+
             if (!_initialized && _stats != null)
             {
                 InitializeHealth();
             }
 
-            _targetRenderer = GetComponent<Renderer>();
+           
+           
         }
 
         private void InitializeHealth()
         {
             _currentHealth = Stats.maxHealth;
             _initialized = true;
-            Debug.Log($"Health initialized to {_currentHealth} for {gameObject.name}");
+            ; Debug.Log($"Health initialized to {_currentHealth} for {gameObject.name}");
+        }
+
+        public void ApplyBubble()
+        {
+            Debug.Log("ApplyBubble Received");
+            Instantiate(_bubble, gameObject.transform.position, _bubble.transform.rotation);
         }
 
         public void ApplyDamage(float damage)
@@ -52,7 +69,7 @@ namespace Chaos.Target
             }
 
             _currentHealth -= damage;
-            Debug.Log($"Damage applied: {damage}. Current health: {_currentHealth}");
+            ; Debug.Log($"Damage applied: {damage}. Current health: {_currentHealth}");
 
             if (_currentHealth <= 0f)
             {
@@ -84,6 +101,8 @@ namespace Chaos.Target
             }
 
         }
+
+
 
     }
 }

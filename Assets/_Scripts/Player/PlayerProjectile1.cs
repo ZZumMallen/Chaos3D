@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Chaos
 {    
-    public class Projectile : MonoBehaviour
+    public class Projectile1 : MonoBehaviour
     {
         public Ammo Ammo { get; set; }
 

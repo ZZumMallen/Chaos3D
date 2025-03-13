@@ -88,7 +88,7 @@ namespace Chaos
         IEnumerator Ascend()
         {
             Debug.Log("Starting ascent after pause");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
 
             // Change to positive speed to go up
             _currentSpeed = maxSpeed;
