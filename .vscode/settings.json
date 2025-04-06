@@ -57,5 +57,5 @@
         "Temp/": true
     },
     "dotnet.defaultSolution": "Chaos3D.sln",
-    "editor.fontFamily": "Atkinson Hyperlegible Mono VF"
+    "editor.fontFamily": ""
 }

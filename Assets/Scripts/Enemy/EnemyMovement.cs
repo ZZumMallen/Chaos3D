@@ -30,12 +30,7 @@ namespace Chaos.Enemies
 
         private void CheckCollider()
         {
-            if (
-                Physics.Raycast(frontCheck.position,                    frontCheck.TransformDirection(Vector3.forward),
-                    out RaycastHit hit,
-                    0.3f
-                )
-            )
+            if (Physics.Raycast(frontCheck.position, frontCheck.TransformDirection(Vector3.forward), out RaycastHit hit, 0.3f))            
             {
                 HandleHit(hit);
             }
@@ -46,7 +41,6 @@ namespace Chaos.Enemies
             if (hit.collider != TryGetComponent(out PlayerController playercontroller))
             {
                 Debug.Log(Time.time);
-
                 Flip();
             }
 
