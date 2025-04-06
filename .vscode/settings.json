@@ -57,5 +57,6 @@
         "Temp/": true
     },
     "dotnet.defaultSolution": "Chaos3D.sln",
-    "editor.fontFamily": ""
+    "editor.fontFamily": "Consolas, 'Courier New', monospace"
+    
 }
