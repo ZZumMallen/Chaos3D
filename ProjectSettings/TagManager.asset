@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Wall
-  - HostileTarget
+  - Audio
+  - Enemy
+  - Hazard
   layers:
   - Default
   - TransparentFX
@@ -14,10 +15,10 @@ TagManager:
   - Water
   - UI
   - Player
-  - Coin
+  - Weightless
   - Ground
-  - Hostile
-  - 
+  - Enemy
+  - Destructable
   - 
   - 
   - 
